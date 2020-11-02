@@ -5,7 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const styles = {
   width: "100%",
   height: "calc(100vh - 80px)",
-  position: "absolute"
+  position: "absolute",
 };
 
 const menuStyle = {
@@ -28,16 +28,14 @@ const MapboxGLMap = () => {
   const [backgroundLayerID, setbackgroundLayerID] = useState("streets-v11");
   const mapContainer = useRef(null);
 
-  
-
   useEffect(() => {
     mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
     const initializeMap = ({ setMap, mapContainer }) => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/mapbox/${backgroundLayerID}",
-        center: [10.408773,63.422091],
-        zoom: 10
+        style: `mapbox://styles/mapbox/${backgroundLayerID}`,
+        center: [10.408773, 63.422091],
+        zoom: 10,
       });
 
       map.on("load", () => {
@@ -48,7 +46,7 @@ const MapboxGLMap = () => {
 
     if (!map) initializeMap({ setMap, mapContainer });
     if (map) map.setStyle("mapbox://styles/mapbox/" + backgroundLayerID);
-  }, [backgroundLayerID,map]);
+  }, [backgroundLayerID, map]);
 
   return (
     <div>
@@ -67,9 +65,9 @@ const MapboxGLMap = () => {
           </div>
         ))}
       </div>
-      <div ref={el => (mapContainer.current = el)} style={styles} />
+      <div ref={(el) => (mapContainer.current = el)} style={styles} />
     </div>
-    );
+  );
 };
 
 export default MapboxGLMap;
